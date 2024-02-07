@@ -7,7 +7,7 @@ export const MainView = () => {
     {
       id: 1,
       title: "Howl's Moving Castle",
-      poster: "../../img/howlsmovingcastle.jpeg",
+      poster: "https://m.media-amazon.com/images/M/MV5BNmM4YTFmMmItMGE3Yy00MmRkLTlmZGEtMzZlOTQzYjk3MzA2XkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
       genre: "Adventure",
       director: "Hayao Miyazaki",
       release: "2004",
@@ -16,7 +16,7 @@ export const MainView = () => {
     {
       id: 2,
       title: "Spirited Away",
-      poster: "../../img/spiritedaway.jpeg",
+      poster: "https://m.media-amazon.com/images/M/MV5BMjlmZmI5MDctNDE2YS00YWE0LWE5ZWItZDBhYWQ0NTcxNWRhXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
       genre: "Adventure",
       director: "Hayao Miyazaki",
       release: "2001",
@@ -25,7 +25,7 @@ export const MainView = () => {
     {
       id: 3,
       title: "Princess Mononoke",
-      poster: "../../img/princessmononoke.jpeg",
+      poster: "https://m.media-amazon.com/images/M/MV5BNTZkYmI0MmEtNGFlZC00OWZjLWFjMmItMjk1OWZkOWJiZGVjXkEyXkFqcGdeQXVyMTMxODk2OTU@._V1_.jpg",
       genre: "Action",
       director: "Hayao Miyazaki",
       release: "1997",
@@ -42,12 +42,12 @@ export const MainView = () => {
   }
 
 if (movies.length === 0) {
-  return <div>The list is empty!</div>
+  return <div>The list is empty!</div>;
 }
 
 return (
   <div>
-    {movies.map((movie) => {
+    {movies.map((movie) => (
       <MovieCard 
       key={movie.id}
       movie={movie}
@@ -55,7 +55,7 @@ return (
         setSelectedMovie(newSelectedMovie);
       }}
       />
-    })}
+    ))}
   </div>
-)
+);
 };
