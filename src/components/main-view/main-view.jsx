@@ -17,10 +17,10 @@ export const MainView = () => {
           image: movie.ImagePath,
           title: movie.Title,
           summary: movie.Description,
-          genre: movie.Genre.Name,
+          genre: movie.Genre,
           year: movie.Released,
           featured: movie.Featured,
-          director: movie.Director.Name
+          director: movie.Director
         };
       });
 
