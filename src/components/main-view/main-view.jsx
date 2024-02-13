@@ -8,19 +8,19 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
 
   useEffect(() => {
-    fetch("https://myflix-ghibli-7c8d5913b80b.herokuapp.com")
+    fetch("https://myflix-ghibli-7c8d5913b80b.herokuapp.com/movies")
     .then((response) => response.json())
     .then((data) => {
-      const moviesfromApi = data.movies.map((movie) => {
+      const moviesfromApi = data.map((movie) => {
         return {
           id: movie._id,
           image: movie.ImagePath,
           title: movie.Title,
           summary: movie.Description,
-          genre: movie.Genre[0],
+          genre: movie.Genre.Name,
           year: movie.Released,
           featured: movie.Featured,
-          director: movie.Director[0]
+          director: movie.Director.Name
         };
       });
 
