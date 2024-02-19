@@ -11,13 +11,18 @@ export const MainView = () => {
   const [selectedMovie, setSelectedMovie] = useState(null);
   const [user, setUser] = useState(storedUser? storedUser : null);
   const [token, setToken] = useState(storedToken? storedToken : null);
+  const baseUrl = 'https://myflix-ghibli-7c8d5913b80b.herokuapp.com';
+  const handleOnLoggedIn = (user, token) => {
+    setUser(user);
+    setToken(token);
+  };
 
   useEffect(() => {
     if (!token) {
       return;
     }
 
-    fetch("https://myflix-ghibli-7c8d5913b80b.herokuapp.com/movies", {
+    fetch(baseUrl + "/movies", {
       headers: { Authorization: `Bearer ${token}` }
     })
     .then((response) => response.json())
@@ -43,10 +48,7 @@ export const MainView = () => {
     return (
     <>
       <LoginView 
-        onLoggedIn={(user, token) => {
-          setUser(user);
-          setToken(token);
-        }}
+        onLoggedIn={handleOnLoggedIn}
       />
       or
       <SignupView />
