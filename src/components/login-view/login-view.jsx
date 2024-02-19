@@ -3,6 +3,8 @@ import { useState } from "react";
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const baseUrl = 'https://myflix-ghibli-7c8d5913b80b.herokuapp.com';
+
   const handleSubmit = (event) => {
     event.preventDefault();
     
@@ -11,7 +13,7 @@ export const LoginView = ({ onLoggedIn }) => {
       Password: password
     };
 
-    fetch("https://myflix-ghibli-7c8d5913b80b.herokuapp.com/login", {
+    fetch(baseUrl + "/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

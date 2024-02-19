@@ -5,6 +5,7 @@ export const SignupView = () => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
+  const baseUrl = 'https://myflix-ghibli-7c8d5913b80b.herokuapp.com';
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -16,7 +17,7 @@ export const SignupView = () => {
       Birthday: birthday
     };
 
-    fetch("https://myflix-ghibli-7c8d5913b80b.herokuapp.com/users", {
+    fetch(baseUrl + "/users", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
