@@ -86,8 +86,8 @@ return (
               ) : movies.length === 0 ? (
                 <Col>The list is empty!</Col>
               ) : (
-                <Col md={7}>
-                  <MovieView movie={movies} />
+                <Col md={10}>
+                  <MovieView movies={movies} />
                 </Col>
               )}
             </>
