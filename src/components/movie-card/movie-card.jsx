@@ -1,3 +1,4 @@
+import React from "react";
 import PropTypes from "prop-types";
 import { Button, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
@@ -10,7 +11,7 @@ export const MovieCard = ({ movie }) => {
       <Card.Body className="justify-content-md-center cardBody">
         <Card.Title>{movie.title}</Card.Title>
         <Card.Text>{movie.director.Name}</Card.Text>
-        <Link to="{`/movies/${encodeURIComponent(movie.id)}`}">
+        <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
           <Button variant="primary" className="w-100 primaryButton">Details</Button>
         </Link>
       </Card.Body>
