@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
 import { Button, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import "./movie-view.scss";
 
 export const MovieView = ({ movie, onBackClick }) => {
