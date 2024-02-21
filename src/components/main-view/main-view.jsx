@@ -3,7 +3,8 @@ import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
-import { Button, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 export const MainView = () => {
   const storedUser = JSON.parse(localStorage.getItem("user"));
@@ -46,45 +47,75 @@ export const MainView = () => {
   }, [token]);
 
 return (
-  <Row className="justify-content-md-center">
-    {!user ? (
-      <Col md={6}>
-        <LoginView
-          onLoggedIn={handleOnLoggedIn}
+  <BrowserRouter>
+    <Row className="justify-content-md-center">
+      <Routes>
+        <Route
+          path="/signup"
+          element={
+            <>
+              {user ? (
+                <Navigate to="/" />
+              ) : (
+                <Col md={6}>
+                  <SignupView />
+                </Col>
+              )}
+            </>
+          } 
         />
-        <div style={{textAlign: "center", fontVariant: "all-small-caps"}}>or</div>
-        <SignupView />
-      </Col>
-    ) : selectedMovie ? (
-      <Col md={10}>
-        <MovieView 
-          movie={selectedMovie} 
-          onBackClick={() => setSelectedMovie(null)}
+        <Route 
+          path="/login"
+          element={
+            <>
+              {user ? (
+                <Navigate to="/" />
+              ) : (
+                <Col md={6}>
+                  <LoginView onLoggedIn={handleOnLoggedIn} />
+                </Col>
+              )}
+            </>
+          }
         />
-      </Col>
-    ) : movies.length === 0 ? (
-      <div>The list is empty!</div>
-    ) : (
-      <>
-        <Button className="mb-3 mt-3 primaryButton" variant="primary" onClick={() => { 
-          setUser(null); 
-          setToken(null); 
-          localStorage.clear(); }}>
-            Logout
-        </Button>
-
-        {movies.map((movie) => (
-          <Col className="mb-5" key={`${movie.id}_movie_list`} md={3}>
-            <MovieCard 
-              movie={movie}
-              onMovieClick={(newSelectedMovie) => {
-                setSelectedMovie(newSelectedMovie);
-              }}
-            />
-          </Col>
-        ))}
-      </>
-    )}
-  </Row>
+        <Route 
+          path="/movies/:movieId"
+          element={
+            <>
+              {!user ? (
+                <Navigate to="/login" replace />
+              ) : movies.length === 0 ? (
+                <Col>The list is empty!</Col>
+              ) : (
+                <Col md={7}>
+                  <MovieView movie={movies} />
+                </Col>
+              )}
+            </>
+          }
+        />
+        <Route 
+          path="/"
+          element={
+            <>
+              {!user ? (
+                <Navigate to="/login" replace />
+              ) : movies.length === 0 ? (
+                <Col>The list is empty!</Col>
+              ) : (
+                <>
+                  {movies.map((movie) => (
+                    <Col className="mb-4" key={`${movie.id}_movie_list`} md={3}>
+                      <MovieCard movie={movie} />
+                    </Col>
+                  ))}
+                </>
+              )}
+            </>
+          }
+        />
+      </Routes>
+    </Row>
+  </BrowserRouter>
 );
 };
