@@ -1,4 +1,6 @@
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -34,40 +36,53 @@ export const SignupView = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input type="text"
+    <Form onSubmit={handleSubmit} className="mt-5 formLabel">
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control 
+        type="text"
+        className="formInput"
+        placeholder="username"
         value={username}
         onChange={(e) => setUsername(e.target.value)}
-        minLength="3"
+        minLength="4"
         required />
-      </label>
-      <label>
-        Password:
-        <input 
+      </Form.Group>
+
+      <Form.Group controlId="formUsername">
+        <Form.Label className="mt-2">Password:</Form.Label>
+        <Form.Control 
         type="password"
+        className="formInput"
+        placeholder="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
+        minLength="8"
         required />
-      </label>
-      <label>
-        Email:
-        <input 
+      </Form.Group>
+
+      <Form.Group controlId="formUsername">
+        <Form.Label className="mt-2">Email:</Form.Label>
+        <Form.Control  
         type="email"
+        className="formInput"
+        placeholder="email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required />
-      </label>
-      <label>
-        Birthday:
-        <input 
+      </Form.Group>
+
+      <Form.Group controlId="formUsername">
+        <Form.Label className="mt-2">Birthday:</Form.Label>
+        <Form.Control  
         type="date"
+        className="formInput"
         value={birthday}
         onChange={(e) => setBirthday(e.target.value)}
         required />
-      </label>
-      <button type="submit">Signup</button>
-    </form>
+      </Form.Group>
+
+      <Button className="mb-2 mt-2 primaryButton w-100" variant="primary" type="submit">Signup</Button>
+    </Form>
   )
 };

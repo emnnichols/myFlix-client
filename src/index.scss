@@ -1,5 +1,34 @@
-$color: steelblue;
+$primary: Thistle;
+$body-bg: Ghostwhite;
 
-.my-flix {
-  color: $color;
-}
+@import '~bootstrap/scss/bootstrap.scss';
+
+.primaryButton {
+  font-size: 15px;
+  letter-spacing: 3px;
+  font-variant: all-small-caps;
+  border-radius: 10px;
+  transition: all 0.9s;
+};
+
+.primaryButton:hover {
+  background-color: ghostwhite;
+  letter-spacing: 5px;
+  box-shadow: thistle 0px 0px 10px 2px;
+  transition: all 0.9s;
+};
+
+.formLabel {
+  font-size: 15px;
+  font-variant: all-small-caps;
+};
+
+.formInput {
+  font-style: italic;
+  font-size: 13px;
+};
+
+.formInput {
+  font-style: none;
+  font-size: 13px;
+};

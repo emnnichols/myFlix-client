@@ -1,0 +1,14 @@
+$primary-color: rgba(216, 191, 216, 0.4);
+
+.moviecard:hover {
+    box-shadow: Thistle 0px 0px 30px 5px;
+    .cardBody {
+      background-color: rgba(216, 191, 216, 0.3);
+      };
+};
+
+.cardBody {
+  text-align: center;
+  background-color: $primary-color;
+  border-radius: 5px;
+};

@@ -1,0 +1,14 @@
+$primary-color: rgba(216, 191, 216, 0.4);
+
+.movieView {
+  padding: 20px 10px;
+  background-color: $primary-color;
+  border-radius: 10px;
+};
+
+.movieTitle {
+  text-align: center;
+  padding: 5px 0px;
+  background-color: thistle;
+  border-radius: 50px;
+};
