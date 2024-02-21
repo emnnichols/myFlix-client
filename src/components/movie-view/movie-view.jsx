@@ -4,7 +4,10 @@ import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 import "./movie-view.scss";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movie }) => {
+  const { movieId } = useParams();
+  const movie = movies.find((m) => m.id === movieId);
+
   return (
     <>
       <Row className="mt-3 movieView">
@@ -34,7 +37,9 @@ export const MovieView = ({ movie, onBackClick }) => {
         </Col>
       </Row>
       <Row>
-        <Button className="mt-3 primaryButton" variant="primary" onClick={onBackClick}>Back</Button>
+        <Link to={`/`}>
+          <Button className="mt-3 primaryButton" variant="primary">Back</Button>
+        </Link>
       </Row>
     </>
   );
