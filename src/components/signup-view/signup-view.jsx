@@ -1,6 +1,5 @@
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { Button, Form } from "react-bootstrap";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -49,7 +48,7 @@ export const SignupView = () => {
         required />
       </Form.Group>
 
-      <Form.Group controlId="formUsername">
+      <Form.Group controlId="formPassword">
         <Form.Label className="mt-2">Password:</Form.Label>
         <Form.Control 
         type="password"
@@ -61,7 +60,7 @@ export const SignupView = () => {
         required />
       </Form.Group>
 
-      <Form.Group controlId="formUsername">
+      <Form.Group controlId="formEmail">
         <Form.Label className="mt-2">Email:</Form.Label>
         <Form.Control  
         type="email"
@@ -72,7 +71,7 @@ export const SignupView = () => {
         required />
       </Form.Group>
 
-      <Form.Group controlId="formUsername">
+      <Form.Group controlId="formBirthday">
         <Form.Label className="mt-2">Birthday:</Form.Label>
         <Form.Control  
         type="date"
