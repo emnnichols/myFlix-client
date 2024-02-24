@@ -48,6 +48,50 @@ export const MainView = () => {
     });
   }, [token]);
 
+  const addFav = (id) => {
+    fetch(baseUrl + `/profile/${user.Username}/movies/${id}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        alert("Movie not added");
+      }
+    })
+    .then((user) => {
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+        setUser(user);
+      }
+    })
+  };
+
+  const removeFav = (id) => {
+    fetch(baseUrl + `/profile/${user.Username}/movies/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        alert("Movie not removed");
+      }
+    })
+    .then((user) => {
+      if (user) {
+        localStorage.setItem("user", JSON.stringify(user));
+        setUser(user);
+      }
+    })
+  };
+
 return (
   <BrowserRouter>
     <NavigationBar
@@ -137,7 +181,11 @@ return (
                 <Col>The list is empty!</Col>
               ) : (
                 <Col md={10}>
-                  <MovieView movies={movies} />
+                  <MovieView 
+                    movies={movies} 
+                    addFav={addFav}
+                    removeFav={removeFav}
+                  />
                 </Col>
               )}
             </>
@@ -155,7 +203,12 @@ return (
                 <>
                   {movies.map((movie) => (
                     <Col className="mb-4" key={`${movie.id}_movie_list`} md={3}>
-                      <MovieCard movie={movie} />
+                      <MovieCard 
+                        movie={movie}
+                        addFav={addFav}
+                        removeFav={removeFav} 
+                        isFavorite={user.FavoriteMovies.includes(movie.id)}
+                      />
                     </Col>
                   ))}
                 </>
