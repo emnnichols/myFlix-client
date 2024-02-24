@@ -3,7 +3,7 @@ $body-bg: Ghostwhite;
 
 @import '~bootstrap/scss/bootstrap.scss';
 
-.primaryButton {
+.primaryButton, .deleteButton {
   font-size: 15px;
   letter-spacing: 3px;
   font-variant: all-small-caps;
@@ -17,6 +17,31 @@ $body-bg: Ghostwhite;
   box-shadow: thistle 0px 0px 10px 2px;
   transition: all 0.9s;
 };
+
+.deleteButton:hover {
+  color: red;
+  font-weight: 700;
+  background-color: ghostwhite;
+  letter-spacing: 4px;
+  box-shadow: red 0px 0px 10px 2px;
+  transition: all 0.9s;
+};
+
+.deleteButton {
+  margin-top: 10px;
+};
+
+.warning {
+  letter-spacing: 2px;
+  margin-top: 150px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px;
+  border: 2px dashed red;
+  color: black;
+  border-radius: 10px;
+}
 
 .formLabel {
   font-size: 15px;
