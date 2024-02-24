@@ -1,11 +1,13 @@
 import { Button, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./movie-view.scss";
 
 export const MovieView = ({ movies }) => {
   const { movieId } = useParams();
   const movie = movies.find((movie) => movie.id === movieId);
+
+  const navigate = useNavigate();
 
   return (
     <>
@@ -36,9 +38,7 @@ export const MovieView = ({ movies }) => {
         </Col>
       </Row>
       <Row>
-        <Link to={`/`}>
-          <Button className="mt-3 w-100 primaryButton" variant="primary">Back</Button>
-        </Link>
+        <Button className="mt-3 w-100 primaryButton" variant="primary" onClick={() => navigate(-1)}>Back</Button>
       </Row>
     </>
   );
