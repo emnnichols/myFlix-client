@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
 
 export const SignupView = () => {
@@ -7,6 +8,8 @@ export const SignupView = () => {
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
   const baseUrl = 'https://myflix-ghibli-7c8d5913b80b.herokuapp.com';
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -18,7 +21,7 @@ export const SignupView = () => {
       Birthday: birthday
     };
 
-    fetch(baseUrl + "/users", {
+    fetch(baseUrl + "/signup", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -27,7 +30,8 @@ export const SignupView = () => {
     }).then((response) => {
       if (response.ok) {
         alert("Signup successful!");
-        window.location.reload();
+        window.location;
+        navigate("/");
       } else {
         alert("Signup failed")
       }
