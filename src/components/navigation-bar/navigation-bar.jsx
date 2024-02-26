@@ -1,43 +1,47 @@
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Row, Col, Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 export const NavigationBar = ({ user, onLoggedOut }) => {
   return (
-    <Navbar bg="light" expand="lg">
+    <Row>
+    <Col className="w-100">
+    <Navbar className="navBar" expand="md">
       <Container>
         <Navbar.Brand as={Link} to="/">
-          Ghibli App
+          <span className="h1">Ghibli App</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
+          <Nav className="h3 mt-1">
             {!user && (
               <>
-                <Nav.Link as={Link} to="/login">
+                <Nav.Link className="navLink" as={Link} to="/login">
                   Login
                 </Nav.Link>
-                <Nav.Link as={Link} to="/signup">
+                <Nav.Link className="navLink" as={Link} to="/signup">
                   Signup
                 </Nav.Link>
               </>
             )}
             {user && (
               <>
-                <Nav.Link as={Link} to="/">
+                <Nav.Link className="navLink" as={Link} to="/">
                   Home
                 </Nav.Link>
-                <Nav.Link as={Link} to={`/profile/${user.Username}`}>
+                <Nav.Link className="navLink" as={Link} to={`/profile/${user.Username}`}>
                   Profile
                 </Nav.Link>
-                <Nav.Link as={Link} to={`/profile/${user.Username}/account`}>
+                <Nav.Link className="navLink" as={Link} to={`/profile/${user.Username}/account`}>
                   Account
                 </Nav.Link>
-                <Nav.Link onClick={onLoggedOut}>Logout</Nav.Link>
+                <Nav.Link className="navLink" onClick={onLoggedOut}>Logout</Nav.Link>
               </>
             )}
           </Nav>
         </Navbar.Collapse>
-      </Container>
+        </Container>
     </Navbar>
+        </Col>
+      </Row>
   )
 };

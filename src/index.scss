@@ -5,6 +5,7 @@ $body-bg: Ghostwhite;
 
 .primaryButton, .deleteButton {
   font-size: 15px;
+  width: 100px;
   letter-spacing: 3px;
   font-variant: all-small-caps;
   border-radius: 10px;
@@ -56,4 +57,22 @@ $body-bg: Ghostwhite;
 .formInput {
   font-style: none;
   font-size: 13px;
+};
+
+.navBar {
+  font-family: "Urbanist", sans-serif;
+  font-variant: all-small-caps;
+  background-color: rgba(216, 191, 216,0.2);
+  padding: 0px 5px 5px 5px;
+  margin: 10px 0px;
+  border-radius: 5px;
+};
+
+.navLink, .navLink:hover {
+  border-radius: 10px;
+  transition: all 0.5s;
+};
+
+.navLink:hover {
+  background-color: rgba(216, 191, 216, 0.5);
 };

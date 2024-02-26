@@ -1,7 +1,7 @@
 $primary-color: rgba(216, 191, 216, 0.4);
 
 .movieView {
-  padding: 20px 10px;
+  padding: 0px 10px 20px 10px;
   background-color: $primary-color;
   border-radius: 10px;
 };
@@ -12,3 +12,17 @@ $primary-color: rgba(216, 191, 216, 0.4);
   background-color: thistle;
   border-radius: 50px;
 };
+
+.favoriteStatus {
+  position: absolute;
+  background-color: thistle;
+  padding: 5px 10px;
+  border-radius: 50px;
+  transition: all 0.5s;
+};
+
+.favoriteStatus:hover {
+  background-color: ghostwhite;
+  color: thistle;
+  transition: all 0.5s;
+}

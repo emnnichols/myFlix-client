@@ -15,11 +15,11 @@ export const MovieCard = ({ movie, addFav, removeFav, isFavorite }) => {
       <Card.Img variant="top" src={movie.image}/>
       <Card.Body className="justify-content-md-center cardBody">
       <Card.Text>
-          {isFavorite.includes(movie) ? (<Button onClick={remove} className="primaryButton"><FaHeart /></Button>)
-          : (<Button onClick={add} className="primaryButton"><FaRegHeart /></Button>)}
+          {isFavorite.includes(movie) ? (<Button onClick={remove} className="primaryButton mt-2"><FaHeart /></Button>)
+          : (<Button onClick={add} className="primaryButton mt-2"><FaRegHeart /></Button>)}
           <span> </span>
         <Link to={`/movies/${encodeURIComponent(movie.id)}`}>
-          <Button variant="primary" className="primaryButton">Details</Button>
+          <Button variant="primary" className="primaryButton mt-2">Details</Button>
         </Link></Card.Text>
         <Card.Title style={{letterSpacing:"1px"}}>{movie.title}</Card.Title>
         <Card.Text style={{fontStyle: "italic"}}>{movie.director.Name}</Card.Text>
