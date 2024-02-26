@@ -40,6 +40,7 @@ export const ProfileView = ({ user, isFavorite, addFav, removeFav }) => {
           <Col lg={3} md={6} className="mb-2">
               <MovieCard 
                 movie={movie}
+                isFavorite={isFavorite}
                 removeFav={removeFav}
                 addFav={addFav}
               />

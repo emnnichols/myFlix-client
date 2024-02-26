@@ -50,6 +50,8 @@ export const MainView = () => {
   }, [token]);
 
   useEffect(() => {
+    if (!user) {return}
+
     fetch(baseUrl + `/profile/${user.Username}`, {
       method: "GET",
       headers: {
@@ -73,48 +75,47 @@ export const MainView = () => {
     })
     });
 
-  const addFav = (id) => {
-    fetch(baseUrl + `/profile/${user.Username}/movies/${id}`, {
+  const addFav = (movieId) => {
+
+    fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
-    .then((response) => {
+    .then(async (response) => {
       if (response.ok) {
-        return response.json();
+        const data = await response.json();
+        localStorage.setItem("user", JSON.stringify(data));
+        setUser(data);
+
+        alert("Added to favorites!");
       } else {
-        alert("Movie not added");
+        alert("Error");
       }
     })
-    .then((user) => {
-      if (user) {
-        localStorage.setItem("user", JSON.stringify(user));
-        setUser(user);
-      }
-    })
+    .catch((e) => {console.log(e)})
   };
 
-  const removeFav = (id) => {
-    fetch(baseUrl + `/profile/${user.Username}/movies/${id}`, {
+  const removeFav = (movieId) => {
+    fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
-    .then((response) => {
+    .then(async (response) => {
       if (response.ok) {
-        return response.json();
+        const data = await response.json();
+        localStorage.setItem("user", JSON.stringify(data));
+        setUser(data);
+
+        alert("Removed from favorites!");
       } else {
-        alert("Movie not removed");
+        alert("Error");
       }
     })
-    .then((user) => {
-      if (user) {
-        localStorage.setItem("user", JSON.stringify(user));
-        setUser(user);
-      }
-    })
+    .catch((e) => {console.log(e)})
   };
 
 return (
@@ -226,7 +227,7 @@ return (
               ) : (
                 <>
                   {movies.map((movie) => (
-                    <Col className="mb-4" key={`${movie.id}_movie_list`} md={3}>
+                    <Col className="mb-4" key={`${movie.id}_movie_list`} md={3} sm={6}>
                       <MovieCard 
                         movie={movie}
                         addFav={addFav}
