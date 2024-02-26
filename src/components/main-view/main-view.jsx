@@ -227,7 +227,7 @@ return (
               ) : (
                 <>
                   {movies.map((movie) => (
-                    <Col className="mb-4" key={`${movie.id}_movie_list`} md={3} sm={6}>
+                    <Col className="mb-4" key={`${movie.id}_movie_list`} lg={3} md={4} sm={12}>
                       <MovieCard 
                         movie={movie}
                         addFav={addFav}
