@@ -1,54 +1,31 @@
-import { useState, useEffect } from "react";
-import { Button, Row, Col, Card } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
+import { FaHeart } from "react-icons/fa6";
+import { IoPersonCircleOutline } from "react-icons/io5";
 import "./profile-view.scss";
 
-export const ProfileView = ({ user, token, movies, removeFav }) => {
-  const [favMovies, setFav] = useState([]);
-
+export const ProfileView = ({ user, isFavorite, addFav, removeFav }) => {
   const date = new Date(user.Birthday);
   const birthday = date.toUTCString();
-  const baseUrl = 'https://myflix-ghibli-7c8d5913b80b.herokuapp.com';
 
-
-  useEffect(() => {
-    fetch(baseUrl + `/profile/${user.Username}`, {
-      method: "GET",
-      headers: {
-        Authorization: `Bearer ${token}`
-      }
-    })
-    .then(async (response) => {
-      const userData = await response.json();
-      const userMovies = userData['FavoriteMovies'];
-
-      if (!userMovies) {
-        setFav("No favorites yet!")
-      } else {
-        const findMovies = movies.filter((m) => userMovies.includes(m.id))
-        const movieList = [];
-
-        findMovies.forEach((movie) => movieList.push(movie));
-
-        setFav(movieList)
-      }
-    })
-    });
-  
   return (
     <>
       <Row>
         <Card.Title className="mt-5 cardLabel w-100">
-          <h2>{user.Username}</h2>
+          <p style={{paddingTop:"15px"}}><IoPersonCircleOutline size={150} /></p>
         </Card.Title>
         <Card className="mb-5 justify-content-md-center">
           <Card.Body>
             <Col md={12}>
-              <span className="userInfo">Birthday</span> {birthday}
+            <span className="userInfo">Username</span> {user.Username}
+            </Col>
+            <br/>
+            <Col md={12}>
+            <span className="userInfo">Birthday</span> {birthday}
             </Col>
             <br />
             <Col md={12}>
-            <span className="userInfo">Favorite Movies</span> {favMovies.length}
+            <span className="userInfo" style={{paddingBottom:"5px"}}><FaHeart /></span> {isFavorite.length}
             </Col>
           </Card.Body>
         </Card>
@@ -57,12 +34,14 @@ export const ProfileView = ({ user, token, movies, removeFav }) => {
       <Card.Title className="mb-3 cardLabel w-100">
           <h3>Favorite Movies</h3>
       </Card.Title>
-      <Card>
+      <Card style={{padding:"10px"}} className="mb-5">
       <Row>
-        {favMovies.map((movie) => (
-          <Col lg={3} md={6}>
+        {isFavorite.map((movie) => (
+          <Col lg={3} md={6} className="mb-2">
               <MovieCard 
                 movie={movie}
+                removeFav={removeFav}
+                addFav={addFav}
               />
           </Col>
         ))}

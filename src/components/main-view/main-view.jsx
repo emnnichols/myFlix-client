@@ -15,6 +15,7 @@ export const MainView = () => {
   const [movies, setMovies] = useState([]);
   const [user, setUser] = useState(storedUser? storedUser : null);
   const [token, setToken] = useState(storedToken? storedToken : null);
+  const [favMovies, setFav] = useState([]);
   const baseUrl = 'https://myflix-ghibli-7c8d5913b80b.herokuapp.com';
   const handleOnLoggedIn = (user, token) => {
     setUser(user);
@@ -47,6 +48,30 @@ export const MainView = () => {
       setMovies(moviesfromApi);
     });
   }, [token]);
+
+  useEffect(() => {
+    fetch(baseUrl + `/profile/${user.Username}`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(async (response) => {
+      const userData = await response.json();
+      const userMovies = userData['FavoriteMovies'];
+
+      if (!userMovies) {
+        setFav("No favorites yet!")
+      } else {
+        const findMovies = movies.filter((m) => userMovies.includes(m.id))
+        const movieList = [];
+
+        findMovies.forEach((movie) => movieList.push(movie));
+
+        setFav(movieList)
+      }
+    })
+    });
 
   const addFav = (id) => {
     fetch(baseUrl + `/profile/${user.Username}/movies/${id}`, {
@@ -159,10 +184,8 @@ return (
               ) : (
                 <Col md={10}>
                   <ProfileView 
-                    user={user} 
-                    token={token} 
-                    setUser={setUser}
-                    movies={movies}
+                    user={user}
+                    isFavorite={favMovies}
                     addFav={addFav}
                     removeFav={removeFav}
                   />
@@ -185,6 +208,7 @@ return (
                     movies={movies} 
                     addFav={addFav}
                     removeFav={removeFav}
+                    isFavorite={favMovies}
                   />
                 </Col>
               )}
@@ -207,7 +231,7 @@ return (
                         movie={movie}
                         addFav={addFav}
                         removeFav={removeFav} 
-                        isFavorite={user.FavoriteMovies.includes(movie.id)}
+                        isFavorite={favMovies}
                       />
                     </Col>
                   ))}
