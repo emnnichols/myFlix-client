@@ -5,19 +5,24 @@ import { FaHeart } from "react-icons/fa6";
 import { FaRegHeart } from "react-icons/fa";
 import "./movie-view.scss";
 
-export const MovieView = ({ movies, addFav, removeFav, isFavorite }) => {
+export const MovieView = ({ movies, isFavorite, addFav, removeFav }) => {
   const { movieId } = useParams();
   const movie = movies.find((movie) => movie.id === movieId);
-  const navigate = useNavigate();
   const add = () => addFav(movie.id);
   const remove = () => removeFav(movie.id);
+  const navigate = useNavigate();
 
   return (
     <>
       <Row className="mt-3 movieView">
         <Col>
-          {isFavorite.includes(movie) ? (<Button onClick={remove} style={{backgroundColor: "transparent", border:"none"}}><div className="favoriteStatus mt-4"><FaHeart /></div></Button>)
-          : (<Button type="submit" onClick={add} style={{backgroundColor: "transparent", border:"none"}}><div className="favoriteStatus mt-4"><FaRegHeart /></div></Button>)}
+          {isFavorite.includes(movie)
+           ? (<Button onClick={remove} style={{backgroundColor: "transparent", border:"none"}}>
+              <div className="favorited mt-4"><FaHeart /></div>
+            </Button>)
+          : (<Button type="submit" onClick={add} style={{backgroundColor: "transparent", border:"none"}}>
+              <div className="notFavorited mt-4"><FaRegHeart /></div>
+            </Button>)}
           <img src={movie.image} className="w-100"/>
         </Col>
         <Col md={7} className="mt-3">
@@ -38,11 +43,11 @@ export const MovieView = ({ movies, addFav, removeFav, isFavorite }) => {
           </div>
           <div className="mt-1">
             <span className="h6">Featured: </span>
-            <span>{movie.featured.toString()}</span>
+            <span>{movie.featured}</span>
           </div>
         </Col>
       </Row>
-      <Row>
+      <Row className="mb-5">
         <Button className="mt-3 w-100 primaryButton" variant="primary" onClick={() => navigate(-1)}>Back</Button>
       </Row>
     </>

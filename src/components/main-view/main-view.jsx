@@ -1,25 +1,35 @@
 import { useState, useEffect } from "react";
+import { Row, Col, Form } from "react-bootstrap";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { NavigationBar } from "../navigation-bar/navigation-bar";
+
+import { baseUrl, storedUser, storedToken } from "../constants";
+
 import { MovieCard } from "../movie-card/movie-card";
 import { MovieView } from "../movie-view/movie-view";
+
 import { LoginView } from "../login-view/login-view";
 import { SignupView } from "../signup-view/signup-view";
+
 import { AccountView } from "../account-view/account-view";
 import { ProfileView } from "../profile-view/profile-view";
-import { NavigationBar } from "../navigation-bar/navigation-bar";
-import { Row, Col } from "react-bootstrap";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+
 
 export const MainView = () => {
-  const storedUser = JSON.parse(localStorage.getItem("user"));
-  const storedToken = localStorage.getItem("token");
-  const [movies, setMovies] = useState([]);
-  const [user, setUser] = useState(storedUser? storedUser : null);
+  const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken? storedToken : null);
+
+  const [movies, setMovies] = useState([]);
   const [favMovies, setFav] = useState([]);
-  const baseUrl = 'https://myflix-ghibli-7c8d5913b80b.herokuapp.com';
   const handleOnLoggedIn = (user, token) => {
     setUser(user);
     setToken(token);
+  };
+
+  const handleOnLoggedOut = () => {
+    setUser(null); 
+    setToken(null); 
+    localStorage.clear();
   };
 
   useEffect(() => {
@@ -117,16 +127,55 @@ export const MainView = () => {
     })
     .catch((e) => {console.log(e)})
   };
+const addFav = (movieId) => {
+
+  fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  .then(async (response) => {
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem("user", JSON.stringify(data));
+      setUser(data);
+
+      alert("Added to favorites!");
+    } else {
+      alert("Error");
+    }
+  })
+  .catch((e) => {console.log(e)})
+};
+
+const removeFav = (movieId) => {
+  fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  })
+  .then(async (response) => {
+    if (response.ok) {
+      const data = await response.json();
+      localStorage.setItem("user", JSON.stringify(data));
+      setUser(data);
+
+      alert("Removed from favorites!");
+    } else {
+      alert("Error");
+    }
+  })
+  .catch((e) => {console.log(e)})
+};
 
 return (
   <BrowserRouter>
     <NavigationBar
       user={user}
-      onLoggedOut={() => {
-        setUser(null); 
-        setToken(null); 
-        localStorage.clear();
-      }}
+      resetSearch={resetSearch}
+      onLoggedOut={handleOnLoggedOut}
     />
     <Row className="justify-content-md-center">
       <Routes>
@@ -152,7 +201,9 @@ return (
                 <Navigate to="/" />
               ) : (
                 <Col md={6}>
-                  <LoginView onLoggedIn={handleOnLoggedIn} />
+                  <LoginView 
+                    onLoggedIn={handleOnLoggedIn}
+                   />
                 </Col>
               )}
             </>
@@ -170,6 +221,8 @@ return (
                     user={user} 
                     token={token} 
                     setUser={setUser}
+                    addFav={addFav}
+                    removeFav={removeFav}
                   />
                 </Col>
               ) }
@@ -206,10 +259,10 @@ return (
               ) : (
                 <Col md={10}>
                   <MovieView 
-                    movies={movies} 
+                    movies={movies}
+                    isFavorite={favMovies}
                     addFav={addFav}
                     removeFav={removeFav}
-                    isFavorite={favMovies}
                   />
                 </Col>
               )}
@@ -230,11 +283,12 @@ return (
                     <Col className="mb-4" key={`${movie.id}_movie_list`} lg={3} md={4} sm={12}>
                       <MovieCard 
                         movie={movie}
-                        addFav={addFav}
-                        removeFav={removeFav} 
                         isFavorite={favMovies}
+                        addFav={addFav}
+                        removeFav={removeFav}
                       />
                     </Col>
+                  </>
                   ))}
                 </>
               )}

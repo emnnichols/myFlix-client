@@ -1,3 +1,4 @@
+import { baseUrl } from "../constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Row, Button, Form } from "react-bootstrap";
@@ -7,7 +8,6 @@ export const AccountView = ({ user, token, setUser }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState(user.Email);
   const [birthday, setBirthday] = useState("");
-  const baseUrl = 'https://myflix-ghibli-7c8d5913b80b.herokuapp.com';
 
   const navigate = useNavigate();
 
