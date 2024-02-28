@@ -9,20 +9,20 @@ $primary-color: rgba(216, 191, 216, 0.4);
 .movieTitle {
   text-align: center;
   padding: 10px 15px;
-  background-color: thistle;
-  border-radius: 50px;
+  background-color: $primary-color;
+  border-radius: 10px;
 };
 
-.favoriteStatus {
+.favorited, .notFavorited, .notFavorited:hover {
   position: absolute;
+  color: darkred;
   background-color: thistle;
   padding: 5px 10px;
   border-radius: 50px;
   transition: all 0.5s;
 };
 
-.favoriteStatus:hover {
-  background-color: ghostwhite;
-  color: thistle;
+.favorited:hover, .notFavorited {
+  color: black;
   transition: all 0.5s;
-}
+};
