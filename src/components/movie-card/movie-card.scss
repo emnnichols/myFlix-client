@@ -1,5 +1,10 @@
 $primary-color: rgba(216, 191, 216, 0.4);
 
+.moviePoster {
+  background-color: $primary-color;
+  padding: 0px 10px 10px;
+};
+
 .moviecard:hover {
     box-shadow: Thistle 0px 0px 30px 5px;
     .cardBody {
@@ -11,4 +16,13 @@ $primary-color: rgba(216, 191, 216, 0.4);
   text-align: center;
   background-color: $primary-color;
   border-radius: 5px;
+};
+
+.primaryButton p {
+  color: black;
+  margin-bottom: 0px;
+};
+
+.primaryButton p:hover {
+  color: darkred;
 };

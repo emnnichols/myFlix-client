@@ -1,13 +1,15 @@
+import { baseUrl } from "../constants";
 import { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
+import { Button, Form } from "react-bootstrap";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
-  const baseUrl = 'https://myflix-ghibli-7c8d5913b80b.herokuapp.com';
+
+  const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -19,7 +21,7 @@ export const SignupView = () => {
       Birthday: birthday
     };
 
-    fetch(baseUrl + "/users", {
+    fetch(baseUrl + "/signup", {
       method: "POST",
       body: JSON.stringify(data),
       headers: {
@@ -28,7 +30,8 @@ export const SignupView = () => {
     }).then((response) => {
       if (response.ok) {
         alert("Signup successful!");
-        window.location.reload();
+        window.location;
+        navigate("/");
       } else {
         alert("Signup failed")
       }
@@ -49,7 +52,7 @@ export const SignupView = () => {
         required />
       </Form.Group>
 
-      <Form.Group controlId="formUsername">
+      <Form.Group controlId="formPassword">
         <Form.Label className="mt-2">Password:</Form.Label>
         <Form.Control 
         type="password"
@@ -61,7 +64,7 @@ export const SignupView = () => {
         required />
       </Form.Group>
 
-      <Form.Group controlId="formUsername">
+      <Form.Group controlId="formEmail">
         <Form.Label className="mt-2">Email:</Form.Label>
         <Form.Control  
         type="email"
@@ -72,7 +75,7 @@ export const SignupView = () => {
         required />
       </Form.Group>
 
-      <Form.Group controlId="formUsername">
+      <Form.Group controlId="formBirthday">
         <Form.Label className="mt-2">Birthday:</Form.Label>
         <Form.Control  
         type="date"

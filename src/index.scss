@@ -1,10 +1,12 @@
 $primary: Thistle;
+$navBar: rgba(216, 191, 216,0.2);
 $body-bg: Ghostwhite;
 
 @import '~bootstrap/scss/bootstrap.scss';
 
-.primaryButton {
+.primaryButton, .deleteButton {
   font-size: 15px;
+  width: 100px;
   letter-spacing: 3px;
   font-variant: all-small-caps;
   border-radius: 10px;
@@ -12,11 +14,35 @@ $body-bg: Ghostwhite;
 };
 
 .primaryButton:hover {
-  background-color: ghostwhite;
+  background-color: $body-bg;
   letter-spacing: 5px;
   box-shadow: thistle 0px 0px 10px 2px;
   transition: all 0.9s;
 };
+
+.deleteButton:hover {
+  color: red;
+  font-weight: 700;
+  background-color: $body-bg;
+  letter-spacing: 4px;
+  box-shadow: red 0px 0px 10px 2px;
+  transition: all 0.9s;
+};
+
+.deleteButton, .warning {
+  margin-top: 10px;
+  border-radius: 10px;
+  padding: 7px;
+  font-weight: 700;
+  text-align: center;
+};
+
+.warning {
+  letter-spacing: 2px;
+  margin-top: 150px;
+  border: 2px dashed red;
+  color: black;
+}
 
 .formLabel {
   font-size: 15px;
@@ -28,7 +54,24 @@ $body-bg: Ghostwhite;
   font-size: 13px;
 };
 
-.formInput {
-  font-style: none;
-  font-size: 13px;
+.formSelect {
+  font-style: italic;
+  font-size: 12px;
+}
+
+.navBar {
+  font-family: "Urbanist", sans-serif;
+  font-variant: all-small-caps;
+  padding: 0px 5px 5px 5px;
+  background-color: $navBar;
+  margin: 15px 0px;
+};
+
+.navBar, .navLink, .navLink:hover {
+  border-radius: 10px;
+  transition: all 0.5s;
+};
+
+.navLink:hover {
+  background-color: $navBar;
 };

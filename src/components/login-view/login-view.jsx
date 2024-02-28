@@ -1,10 +1,10 @@
+import { baseUrl } from "../constants";
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const baseUrl = 'https://myflix-ghibli-7c8d5913b80b.herokuapp.com';
 
   const handleSubmit = (event) => {
     event.preventDefault();

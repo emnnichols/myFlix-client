@@ -1,21 +1,35 @@
-import PropTypes from "prop-types";
-import Button from "react-bootstrap/Button";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Button, Row, Col } from "react-bootstrap";
+import { useParams } from "react-router";
+import { useNavigate } from "react-router-dom";
+import { FaHeart } from "react-icons/fa6";
+import { FaRegHeart } from "react-icons/fa";
 import "./movie-view.scss";
 
-export const MovieView = ({ movie, onBackClick }) => {
+export const MovieView = ({ movies, isFavorite, addFav, removeFav }) => {
+  const { movieId } = useParams();
+  const movie = movies.find((movie) => movie.id === movieId);
+  const add = () => addFav(movie.id);
+  const remove = () => removeFav(movie.id);
+  const navigate = useNavigate();
+
   return (
     <>
       <Row className="mt-3 movieView">
         <Col>
+          {isFavorite.includes(movie)
+           ? (<Button onClick={remove} style={{backgroundColor: "transparent", border:"none"}}>
+              <div className="favorited mt-4"><FaHeart /></div>
+            </Button>)
+          : (<Button type="submit" onClick={add} style={{backgroundColor: "transparent", border:"none"}}>
+              <div className="notFavorited mt-4"><FaRegHeart /></div>
+            </Button>)}
           <img src={movie.image} className="w-100"/>
         </Col>
-        <Col md={7}>
-          <div className="movieTitle mb-3">
+        <Col md={7} className="mt-3">
+          <div className="movieTitle mb-3 mt-3">
             <span className="h2">{movie.title} ({movie.year})</span>
           </div>
-          <div className="mt-1">
+          <div>
             <span className="h6">Genre: </span>
             <span>{movie.genre.Name}</span>
           </div>
@@ -29,30 +43,13 @@ export const MovieView = ({ movie, onBackClick }) => {
           </div>
           <div className="mt-1">
             <span className="h6">Featured: </span>
-            <span>{movie.featured.toString()}</span>
+            <span>{movie.featured}</span>
           </div>
         </Col>
       </Row>
-      <Row>
-        <Button className="mt-3 primaryButton" variant="primary" onClick={onBackClick}>Back</Button>
+      <Row className="mb-5">
+        <Button className="mt-3 w-100 primaryButton" variant="primary" onClick={() => navigate(-1)}>Back</Button>
       </Row>
     </>
   );
-};
-
-MovieView.propType = {
-  movie: PropTypes.shape({
-    image: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
-    year: PropTypes.string,
-    genre: PropTypes.shape({
-      name: PropTypes.string.isRequired
-    }),
-    director: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    }),
-    summary: PropTypes.string.isRequired,
-    featured: PropTypes.bool.isRequired
-  }).isRequired,
-  onBackClick: PropTypes.func.isRequired
 };
