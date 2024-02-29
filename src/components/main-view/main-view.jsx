@@ -26,6 +26,7 @@ export const MainView = () => {
 
   const [movies, setMovies] = useState([]);
   const [favMovies, setFav] = useState([]);
+  const [similar, setSimilar] = useState([]);
 
   const [search, setSearch] = useState("");
   const [genre, setGenre] = useState("");
@@ -170,48 +171,48 @@ export const MainView = () => {
       console.log(e)}
   )},[year, token]);
 
-const addFav = (movieId) => {
+  const addFav = (movieId) => {
 
-  fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-  .then(async (response) => {
-    if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("user", JSON.stringify(data));
-      setUser(data);
+    fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(async (response) => {
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("user", JSON.stringify(data));
+        setUser(data);
 
-      alert("Added to favorites!");
-    } else {
-      alert("Error");
-    }
-  })
-  .catch((e) => {console.log(e)})
-};
+        alert("Added to favorites!");
+      } else {
+        alert("Error");
+      }
+    })
+    .catch((e) => {console.log(e)})
+  };
 
-const removeFav = (movieId) => {
-  fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-  .then(async (response) => {
-    if (response.ok) {
-      const data = await response.json();
-      localStorage.setItem("user", JSON.stringify(data));
-      setUser(data);
+  const removeFav = (movieId) => {
+    fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(async (response) => {
+      if (response.ok) {
+        const data = await response.json();
+        localStorage.setItem("user", JSON.stringify(data));
+        setUser(data);
 
-      alert("Removed from favorites!");
-    } else {
-      alert("Error");
-    }
-  })
-  .catch((e) => {console.log(e)})
-};
+        alert("Removed from favorites!");
+      } else {
+        alert("Error");
+      }
+    })
+    .catch((e) => {console.log(e)})
+  };
 
 return (
   <>

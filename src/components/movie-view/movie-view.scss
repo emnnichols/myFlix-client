@@ -26,3 +26,13 @@ $primary-color: rgba(216, 191, 216, 0.4);
   color: black;
   transition: all 0.5s;
 };
+
+.viewLabel {
+  font-style: italic;
+  background-color: rgba(216, 191, 216,0.2);
+  font-variant: all-small-caps;
+  border-radius: 10px;
+  text-align: center;
+  padding: 5px 20px 7px;
+  letter-spacing: 3px;
+}
