@@ -166,6 +166,8 @@ export const MainView = () => {
       console.log(data)
     })
     .catch((e) => {
+      alert("Something went wrong!");
+      console.log(e)}
   )},[year, token]);
 
 const addFav = (movieId) => {
@@ -212,7 +214,7 @@ const removeFav = (movieId) => {
 };
 
 return (
-  <BrowserRouter>
+  <>
     <NavigationBar
       user={user}
       resetSearch={resetSearch}
@@ -372,6 +374,8 @@ return (
               />
             </Col>
             )
+            }
+          </>
         }
         />
         <Route 
@@ -501,6 +505,6 @@ return (
         />
       </Routes>
     </Row>
-  </BrowserRouter>
+  </>
 );
 };
