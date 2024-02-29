@@ -124,26 +124,28 @@ export const MainView = () => {
       console.log(e)}
   )},[dirName, token]);
 
-  const removeFav = (movieId) => {
-    fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
-      method: "DELETE",
+  useEffect(() => {
+    if (genre === "") {return}
+
+    navigate(`/movies/genres/${genre}`);
+
+    fetch(baseUrl + `/movies/genres/${genre}/about`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
-    .then(async (response) => {
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem("user", JSON.stringify(data));
-        setUser(data);
+    .then(async (response) => await response.json())
+    .then((data) => {
+      console.log(data)
 
-        alert("Removed from favorites!");
-      } else {
-        alert("Error");
+      if (data) {
+        setAbout(data);
       }
     })
-    .catch((e) => {console.log(e)})
-  };
+    .catch((e) => {
+      alert("Something went wrong!");
+      console.log(e)}
+  )},[genre, token]);
 const addFav = (movieId) => {
 
   fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
@@ -308,6 +310,28 @@ return (
               }
             </>
           }
+        />
+        <Route
+        path="/movies/genres/:genre"
+        element={
+          <>
+            {!user ? (
+              <Navigate to="/login" replace />
+            ) : (
+              <Col md={10}>
+              <GenreView 
+                movies={movies}
+                about={about}
+                resetSearch={resetSearch}
+                isFavorite={favMovies}
+                addFav={addFav}
+                removeFav={removeFav}
+              />
+            </Col>
+            )
+            }
+          </>
+        }
         />
         <Route 
           path="/"
