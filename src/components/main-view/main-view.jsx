@@ -101,27 +101,28 @@ export const MainView = () => {
     })
     });
 
-  const addFav = (movieId) => {
+  useEffect(() => {
+    if (dirName === "") {return}
 
-    fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
-      method: "POST",
+    navigate(`/movies/directors/${dirName}`);
+
+    fetch(baseUrl + `/movies/directors/${dirName}/about`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
     })
-    .then(async (response) => {
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem("user", JSON.stringify(data));
-        setUser(data);
+    .then(async (response) => await response.json())
+    .then((data) => {
+      console.log(data)
 
-        alert("Added to favorites!");
-      } else {
-        alert("Error");
+      if (data) {
+        setAbout(data);
       }
     })
-    .catch((e) => {console.log(e)})
-  };
+    .catch((e) => {
+      alert("Something went wrong!");
+      console.log(e)}
+  )},[dirName, token]);
 
   const removeFav = (movieId) => {
     fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
@@ -283,6 +284,28 @@ return (
                   />
                 </Col>
               )}
+            </>
+          }
+        />
+        <Route
+          path="/movies/directors/:director"
+          element={
+            <>
+              {!user ? (
+                <Navigate to="/login" replace />
+              ) : (
+                <Col md={10}>
+                <DirectorView 
+                  movies={movies}
+                  about={about}
+                  resetSearch={resetSearch}
+                  isFavorite={favMovies}
+                  addFav={addFav}
+                  removeFav={removeFav}
+                />
+              </Col>
+              )
+              }
             </>
           }
         />
