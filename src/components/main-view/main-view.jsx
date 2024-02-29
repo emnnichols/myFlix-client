@@ -14,6 +14,10 @@ import { SignupView } from "../signup-view/signup-view";
 import { AccountView } from "../account-view/account-view";
 import { ProfileView } from "../profile-view/profile-view";
 
+import { DirectorView } from "../director-view/director-view";
+import { GenreView } from "../genre-view/genre-view";
+import { YearView } from "../year-view/year-view";
+
 export const MainView = () => {
   const navigate = useNavigate();
   
@@ -146,6 +150,24 @@ export const MainView = () => {
       alert("Something went wrong!");
       console.log(e)}
   )},[genre, token]);
+
+  useEffect(() => {
+    if (year === "") {return}
+
+    navigate(`/movies/year/${year}`);
+    
+    fetch(baseUrl + `/movies/year/${year}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    .then(async (response) => await response.json())
+    .then((data) => {
+      console.log(data)
+    })
+    .catch((e) => {
+  )},[year, token]);
+
 const addFav = (movieId) => {
 
   fetch(baseUrl + `/profile/${user.Username}/movies/${movieId}`, {
@@ -331,6 +353,25 @@ return (
             )
             }
           </>
+        }
+        />
+        <Route
+        path="/movies/year/:released"
+        element={
+          <>
+            {!user ? (
+              <Navigate to="/login" replace />
+            ) : (
+              <Col md={10}>
+              <YearView 
+                movies={movies}
+                resetSearch={resetSearch}
+                isFavorite={favMovies}
+                addFav={addFav}
+                removeFav={removeFav}
+              />
+            </Col>
+            )
         }
         />
         <Route 
