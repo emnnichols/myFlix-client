@@ -1,13 +1,14 @@
 import { Row, Col, Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLoggedOut, resetSearch }) => {
+
   return (
     <Row>
     <Col className="w-100">
     <Navbar className="navBar" expand="md">
       <Container>
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/" onClick={resetSearch}>
           <span className="h1">Ghibli App</span>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -25,7 +26,7 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
             )}
             {user && (
               <>
-                <Nav.Link className="navLink" as={Link} to="/">
+                <Nav.Link className="navLink" as={Link} to="/" onClick={resetSearch}>
                   Home
                 </Nav.Link>
                 <Nav.Link className="navLink" as={Link} to={`/profile/${user.Username}`}>
