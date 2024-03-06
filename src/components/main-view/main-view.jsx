@@ -389,80 +389,82 @@ return (
                 <Col>The list is empty!</Col>
               ) : (
                 <>
-                <Form className="justify-content-md-center mb-3">
+                <Form className="justify-content-md-center mb-3" >
+                  <Row>
+                    <Col lg={3} md={12} sm={12}>
                       <Form.Control 
                         type="search"
                         onChange={(e) => setSearch(e.target.value)}
                         className="formInput"
                         placeholder="search"
                       />
-                      <Row>
-                        <Col md={4}>
-                          {/* Search by genre */}
-                          <Form.Select className="formSelect"
-                            onChange={(e) => {
-                              setDirector(""), setYear(""),
-                              setGenre(e.target.value)}}>
-                              <option value="" >Search by Genre</option>
-                              <option value="Action">Action</option>
-                              <option value="Adventure">Adventure</option>
-                              <option value="Biography">Biography</option>
-                              <option value="Comedy">Comedy</option>
-                              <option value="Drama">Drama</option>
-                              <option value="Family">Family</option>
-                              <option value="Fantasy">Fantasy</option>
-                              <option value="Romance">Romance</option>
-                              <option value="Sci-Fi">Sci-Fi</option>
-                              <option value="War">War</option>
-                          </Form.Select>
-                          </Col>
-                          <Col md={4}>
-                            {/* Search by Director */}
-                            <Form.Select className="formSelect" 
-                            onChange={(e) => {
-                              setGenre(""), setYear(""),
-                              setDirector(e.target.value)}}>
-                              <option value="">Search by Director</option>
-                              <option value="Yoshifumi Kondô">Yoshifumi Kondô</option>
-                              <option value="Gorô Miyazaki">Gorô Miyazaki</option>
-                              <option value="Hayao Miyazaki">Hayao Miyazaki</option>
-                              <option value="Tomomi Mochizuki">Tomomi Mochizuki</option>
-                              <option value="Hiroyuki Morita">Hiroyuki Morita</option>
-                              <option value="Isao Takahata">Isao Takahata</option>
-                              <option value="Hiromasa Yonebayashi">Hiromasa Yonebayashi</option>
-                            </Form.Select>
-                          </Col>     
-                          <Col md={4}>
-                            {/* Search by year */}
-                            <Form.Select className="formSelect" 
-                            onChange={(e) => {
-                              setGenre(""), setDirector(""),
-                              setYear(e.target.value)}}>
-                              <option value="">Search by Year</option>
-                              <option value="2023">2023</option>
-                              <option value="2020">2020</option>
-                              <option value="2013">2013</option>
-                              <option value="2014">2014</option>
-                              <option value="2011">2011</option>
-                              <option value="2010">2010</option>
-                              <option value="2008">2008</option>
-                              <option value="2006">2006</option>
-                              <option value="2004">2004</option>
-                              <option value="2002">2002</option>
-                              <option value="2001">2001</option>
-                              <option value="1997">1997</option>
-                              <option value="1995">1995</option>
-                              <option value="1994">1994</option>
-                              <option value="1993">1993</option>
-                              <option value="1992">1992</option>
-                              <option value="1991">1991</option>
-                              <option value="1989">1989</option>
-                              <option value="1988">1988</option>
-                              <option value="1986">1986</option>
-                              <option value="1984">1984</option>
-                            </Form.Select>
-                          </Col>
-                          </Row>
+                    </Col>
+                    <Col lg={3} md={4} sm={4} className="col-4 leftForm">
+                      {/* Search by genre */}
+                      <Form.Select className="formSelect"
+                        onChange={(e) => {
+                        setDirector(""), setYear(""),
+                        setGenre(e.target.value)}}>
+                          <option value="" >Filter by Genre</option>
+                          <option value="Action">Action</option>
+                          <option value="Adventure">Adventure</option>
+                          <option value="Biography">Biography</option>
+                          <option value="Comedy">Comedy</option>
+                          <option value="Drama">Drama</option>
+                          <option value="Family">Family</option>
+                          <option value="Fantasy">Fantasy</option>
+                          <option value="Romance">Romance</option>
+                          <option value="Sci-Fi">Sci-Fi</option>
+                          <option value="War">War</option>
+                      </Form.Select>
+                    </Col>
+                    <Col lg={3} md={4} sm={4} className="col-4">
+                      {/* Search by Director */}
+                      <Form.Select className="formSelect" 
+                      onChange={(e) => {
+                        setGenre(""), setYear(""),
+                        setDirector(e.target.value)}}>
+                        <option value="">Filter by Director</option>
+                        <option value="Yoshifumi Kondô">Yoshifumi Kondô</option>
+                        <option value="Gorô Miyazaki">Gorô Miyazaki</option>
+                        <option value="Hayao Miyazaki">Hayao Miyazaki</option>
+                        <option value="Tomomi Mochizuki">Tomomi Mochizuki</option>
+                        <option value="Hiroyuki Morita">Hiroyuki Morita</option>
+                        <option value="Isao Takahata">Isao Takahata</option>
+                        <option value="Hiromasa Yonebayashi">Hiromasa Yonebayashi</option>
+                      </Form.Select>
+                    </Col>     
+                    <Col lg={3} md={4} sm={4} className="col-4 rightForm">
+                      {/* Search by year */}
+                      <Form.Select className="formSelect" 
+                      onChange={(e) => {
+                        setGenre(""), setDirector(""),
+                        setYear(e.target.value)}}>
+                        <option value="">Filter by Year</option>
+                        <option value="2023">2023</option>
+                        <option value="2020">2020</option>
+                        <option value="2013">2013</option>
+                        <option value="2014">2014</option>
+                        <option value="2011">2011</option>
+                        <option value="2010">2010</option>
+                        <option value="2008">2008</option>
+                        <option value="2006">2006</option>
+                        <option value="2004">2004</option>
+                        <option value="2002">2002</option>
+                        <option value="2001">2001</option>
+                        <option value="1997">1997</option>
+                        <option value="1995">1995</option>
+                        <option value="1994">1994</option>
+                        <option value="1993">1993</option>
+                        <option value="1992">1992</option>
+                        <option value="1991">1991</option>
+                        <option value="1989">1989</option>
+                        <option value="1988">1988</option>
+                        <option value="1986">1986</option>
+                        <option value="1984">1984</option>
+                      </Form.Select>
+                    </Col>
+                  </Row>
                 </Form>
 
                 {movies.filter((movie) => {{/* filter by genre */}
