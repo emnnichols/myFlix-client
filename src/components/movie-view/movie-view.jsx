@@ -59,7 +59,7 @@ export const MovieView = ({ movies, isFavorite, addFav, removeFav }) => {
       </Row>
       <Row className="mt-3 mb-3 justify-content-md-center">
         {similarMovies.length !== 0
-          ? (<Row><span className="h3 viewLabel mb-4">Similar movies</span>
+          ? (<Row><span className="h3 viewLabel mb-4">more {selectedMovie.genre.Name} movies</span>
             {similarMovies.map((movie) => (
               <Col lg={3} md={6} className="mb-2">
                 <MovieCard 
