@@ -2,6 +2,8 @@ import { baseUrl } from "../constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form } from "react-bootstrap";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export const SignupView = () => {
   const [username, setUsername] = useState("");
@@ -77,11 +79,20 @@ export const SignupView = () => {
 
       <Form.Group controlId="formBirthday">
         <Form.Label className="mt-2">Birthday:</Form.Label>
-        <Form.Control  
-        type="date"
-        className="formInput"
-        value={birthday}
-        onChange={(e) => setBirthday(e.target.value)}
+        <DatePicker
+          id="formBirthday"
+          showYearDropdown
+          minDate="1941"
+          maxDate={new Date()}
+          dropdownMode="select"
+          showMonthDropdown
+          placeholderText="birthday"
+          calendarClassName="pickerCal"
+          wrapperClassName="formInput"
+          dateFormatCalendar=" "
+          dateFormat="MMM dd YYYY"
+          selected={birthday}
+          onChange={(birthday) => setBirthday(birthday)}
         required />
       </Form.Group>
 
