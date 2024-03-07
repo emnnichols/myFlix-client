@@ -18,21 +18,20 @@ import { DirectorView } from "../director-view/director-view";
 import { GenreView } from "../genre-view/genre-view";
 import { YearView } from "../year-view/year-view";
 
-export const MainView = () => {
-  const navigate = useNavigate();
-  
+export const MainView = () => {  
   const [user, setUser] = useState(storedUser ? storedUser : null);
   const [token, setToken] = useState(storedToken? storedToken : null);
 
   const [movies, setMovies] = useState([]);
   const [favMovies, setFav] = useState([]);
-  const [similar, setSimilar] = useState([]);
 
   const [search, setSearch] = useState("");
   const [genre, setGenre] = useState("");
   const [dirName, setDirector] = useState("");
   const [year, setYear] = useState("");
   const [about, setAbout] = useState("");
+
+  const navigate = useNavigate();
 
   const resetSearch = () => {
     setAbout(""), 
@@ -486,7 +485,7 @@ return (
                   const movieSearch = JSON.stringify(movie);
 
                   return search !== ""
-                  ? movieSearch.toLowerCase().includes(search.toLowerCase())
+                  ? movie.genre.Name.toLowerCase().includes(search.toLowerCase()) || movie.director.Name.toLowerCase().includes(search.toLowerCase()) || movie.title.toLowerCase().includes(search.toLowerCase()) || movieSearch.includes(search.toLowerCase())
                   : movie
                 })
                 .map((movie) => (
