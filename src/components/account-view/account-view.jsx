@@ -2,12 +2,18 @@ import { baseUrl } from "../constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Row, Button, Form } from "react-bootstrap";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import "./account-view.scss";
 
 export const AccountView = ({ user, token, setUser }) => {
   const [username, setUsername] = useState(user.Username);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState(user.Email);
-  const [birthday, setBirthday] = useState("");
+
+  const date = new Date(user.Birthday).toLocaleDateString();
+
+  const [birthday, setBirthday] = useState(date);
 
   const navigate = useNavigate();
 
@@ -52,11 +58,14 @@ export const AccountView = ({ user, token, setUser }) => {
     })
   };
 
-  const handleDelete = () => {
+  const handleDelete = (event) => {
+    if (!password) {return;}
 
-    confirm("Are you sure?");
+    event.preventDefault();
 
-    if (confirm === true) {
+    if (confirm("Are you sure?") == false) {
+      alert("Deletion cancelled");
+    } else {
       fetch(baseUrl + `/profile/${user.Username}/account`, {
         method: "DELETE",
         headers: {
@@ -64,11 +73,11 @@ export const AccountView = ({ user, token, setUser }) => {
         }
       })
       .then((response) => {
-        if (response.ok) {
-          setUser(null);
-          localStorage.clear();
+        if (response.ok) {      
           alert("Account deleted successfully!");
           navigate(`/signup`);
+          setUser(null);
+          localStorage.clear();
         } else {
           const failed = response.json();
           const failedStr = JSON.stringify(failed);
@@ -79,19 +88,13 @@ export const AccountView = ({ user, token, setUser }) => {
           alert(whatFailed)
         }
       })
-      .catch((e) => {
-        alert("Something went wrong!");
-        window.location;
-      })
-    } else {
-      alert("Deletion cancelled");
     }
   };
 
   return (
     <>
       <Row className="justify-content-md-center w-100 mt-5">
-        <Form onSubmit={handleUpdate} className="mt-5 mb-5 formLabel">
+        <Form className="mt-5 mb-5 formLabel">
           <Form.Group controlId="formUsername">
             <Form.Label>Username:</Form.Label>
             <Form.Control 
@@ -128,17 +131,24 @@ export const AccountView = ({ user, token, setUser }) => {
 
           <Form.Group controlId="formBirthday">
             <Form.Label className="mt-2">Birthday:</Form.Label>
-            <Form.Control  
-            type="date"
-            className="formInput"
-            value={birthday}
-            onChange={(e) => setBirthday(e.target.value)}
+            <DatePicker
+            id="formBirthday"
+            showYearDropdown
+            scrollableYearDropdown
+            yearDropdownItemNumber={30}
+            showMonthDropdown
+            calendarClassName="pickerCal"
+            wrapperClassName="formInput"
+            dateFormatCalendar=" "
+            dateFormat="MMM dd YYYY"
+            selected={birthday}
+            onChange={(birthday) => setBirthday(birthday)}
             />
           </Form.Group>
 
           <Button className="mt-4 primaryButton w-100" variant="primary" type="submit" onClick={handleUpdate}>Update Information</Button>
           <p className="warning">-- DANGER ZONE --
-        <Button className="deleteButton w-100" variant="danger" type="submit" onClick={handleDelete}>Delete Account</Button></p>
+        <Button className="primaryButton deleteButton w-100" variant="danger" type="submit" onClick={handleDelete}>Delete Account</Button></p>
         </Form>
       </Row>
     </>

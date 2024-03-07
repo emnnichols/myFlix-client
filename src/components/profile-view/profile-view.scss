@@ -1,16 +1,44 @@
-.userInfo {
+$primary: rgba(143, 188, 143, 0.5);
+$navBar: rgba(143, 188, 143, 0.2);
+$body-bg: Ghostwhite;
+
+.userProfile {
+  font-family: "Urbanist", sans-serif;
+  font-variant: all-small-caps;
   text-align: center;
+  font-size: 20px;
   font-weight: 700;
-  background-color: thistle;
-  border-radius: 5px;
-  padding: 3px 10px;
+  background-color: $navBar;
+  border-radius: 10px;
+  padding: 3px 10px 5px;
 };
+
+.userLabel {
+  font-family: "Urbanist", sans-serif;
+  font-variant: all-small-caps;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  background-color: $navBar;
+  border-radius: 5px;
+  padding: 3px 10px 5px;
+  margin: 0px 0px 10px;
+};
+
+.userInfo {
+  font-family: "Urbanist", sans-serif;
+  font-variant: all-small-caps;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  border-radius: 5px;
+}
 
 .cardLabel {
   font-style: italic;
-  background-color: thistle;
+  background-color: $body-bg;
   font-variant: all-small-caps;
-  border-radius: 5px;
+  border-radius: 10px;
   text-align: center;
-  padding: 5px 20px 1px;
+  padding: 5px 20px 10px;
 };

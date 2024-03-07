@@ -1,12 +1,12 @@
-$primary: Thistle;
-$navBar: rgba(216, 191, 216,0.2);
+$primary: rgba(143, 188, 143, 0.5);
+$navBar: rgba(143, 188, 143, 0.2);
 $body-bg: Ghostwhite;
 
 @import '~bootstrap/scss/bootstrap.scss';
 
 .primaryButton, .deleteButton {
   font-size: 15px;
-  width: 100px;
+  width: 100%;
   letter-spacing: 3px;
   font-variant: all-small-caps;
   border-radius: 10px;
@@ -16,7 +16,7 @@ $body-bg: Ghostwhite;
 .primaryButton:hover {
   background-color: $body-bg;
   letter-spacing: 5px;
-  box-shadow: thistle 0px 0px 10px 2px;
+  box-shadow: rgba(143, 188, 143, 0.5) 0px 0px 10px 2px;
   transition: all 0.9s;
 };
 
@@ -25,31 +25,20 @@ $body-bg: Ghostwhite;
   font-weight: 700;
   background-color: $body-bg;
   letter-spacing: 4px;
-  box-shadow: red 0px 0px 10px 2px;
+  border: none;
+  box-shadow: rgba(255, 0, 0, 0.5) 0px 0px 5px 2px;
   transition: all 0.9s;
 };
 
-.deleteButton, .warning {
-  margin-top: 10px;
-  border-radius: 10px;
-  padding: 7px;
-  font-weight: 700;
-  text-align: center;
-};
-
-.warning {
-  letter-spacing: 2px;
-  margin-top: 150px;
-  border: 2px dashed red;
-  color: black;
-}
-
 .formLabel {
-  font-size: 15px;
+  font-family: "Urbanist", sans-serif;
+  font-size: 18px;
   font-variant: all-small-caps;
 };
 
 .formInput {
+  padding-top: 7px;
+  width: 100%;
   font-style: italic;
   font-size: 13px;
 };
@@ -59,19 +48,67 @@ $body-bg: Ghostwhite;
   font-size: 12px;
 }
 
+// Filter forms
+
+.leftForm {
+  padding-right: 0px;
+}
+
+.rightForm .col-4 {
+  padding-left: 0px;
+}
+
+// Navigation
+
 .navBar {
   font-family: "Urbanist", sans-serif;
   font-variant: all-small-caps;
-  padding: 0px 5px 5px 5px;
-  background-color: $navBar;
-  margin: 15px 0px;
+  text-align: center;
+  margin-left: 0px;
 };
 
-.navBar, .navLink, .navLink:hover {
+.navBar, .navLink {
   border-radius: 10px;
   transition: all 0.5s;
 };
 
+.topNavBar {
+  width: 100%;
+  text-align: center;
+}
+
+.navi {
+  margin-left: 5px;
+}
+
+.navToggle {
+  border: none;
+}
+
 .navLink:hover {
+  border-radius: 10px;
+  transition: all 0.5s;
   background-color: $navBar;
 };
+
+.navBrand{
+  margin: 40px 0px -60px;
+}
+
+.navImg {
+  margin: 0px 0px -50px;
+  width: 400px;
+}
+
+// Movie view/card
+
+.paraText {
+  font-family: "Urbanist", sans-serif;
+  text-align: center;
+}
+
+.viewText {
+  font-family: "Urbanist", sans-serif;
+  font-size: 18px;
+  text-align: center;
+}
