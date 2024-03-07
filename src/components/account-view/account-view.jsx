@@ -10,10 +10,7 @@ export const AccountView = ({ user, token, setUser }) => {
   const [username, setUsername] = useState(user.Username);
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState(user.Email);
-
-  const date = new Date(user.Birthday).toLocaleDateString();
-
-  const [birthday, setBirthday] = useState(date);
+  const [birthday, setBirthday] = useState(new Date(user.Birthday));
 
   const navigate = useNavigate();
 
@@ -137,6 +134,9 @@ export const AccountView = ({ user, token, setUser }) => {
             scrollableYearDropdown
             yearDropdownItemNumber={30}
             showMonthDropdown
+            minDate="1941"
+            maxDate={new Date()}
+            dropdownMode="select"
             calendarClassName="pickerCal"
             wrapperClassName="formInput"
             dateFormatCalendar=" "
