@@ -18,14 +18,16 @@ export const DirectorView = ({ about, movies, isFavorite, resetSearch, addFav, r
         </Button>
       </Link>
         <br/>
-          {director} | {birth
+          <p className="paraText mt-4"><span className="h4">{director} | {birth
             ? birth.replace(/["]+/g,'')
-            : birth} - {death ? death : `Present`}
+            : birth} - {death 
+            ? death.replace(/["]+/g,'') 
+            : `Present`}</span>
         <br/>
         <br/>
-          Bio: {bio
+          {bio
            ? bio.replace(/["]+/g,'')
-             : bio}
+             : bio}</p>
         <br/>
         <br/>
         {movies.filter((movie) => {

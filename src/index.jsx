@@ -7,9 +7,9 @@ import "./index.scss";
 const MyFlixApplication = () => {
   return (
     <BrowserRouter>
-    <Container>
-      <MainView />
-    </Container>
+      <Container>
+        <MainView />
+      </Container>
     </BrowserRouter>
   );
 };

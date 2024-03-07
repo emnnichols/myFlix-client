@@ -17,9 +17,11 @@ export const GenreView = ({ about, movies, isFavorite, resetSearch, addFav, remo
         </Button>
       </Link>
     </Row>
-    <Row>
-    <br/>
-      {genre} | {desc ? desc.replace(/["]+/g,''): desc}
+    <Row className="paraText mt-4">
+      <p><span className="h2" style={{fontVariant: "all-small-caps"}}>{genre}</span>
+      <br/>
+      <br/>
+      {desc ? desc.replace(/["]+/g,''): desc}</p>
     </Row>
     <br/>
       <Row>

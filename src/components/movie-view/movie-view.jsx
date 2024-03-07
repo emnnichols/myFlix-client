@@ -11,8 +11,8 @@ import "./movie-view.scss";
 export const MovieView = ({ movies, isFavorite, addFav, removeFav }) => {
   const { movieId } = useParams();
   const selectedMovie = movies.find((movie) => movie.id === movieId);
-  const add = () => addFav(movie.id);
-  const remove = () => removeFav(movie.id);
+  const add = () => addFav(movieId);
+  const remove = () => removeFav(movieId);
   const navigate = useNavigate();
 
   const similarMovies = movies.filter((movie) => {
@@ -22,7 +22,11 @@ export const MovieView = ({ movies, isFavorite, addFav, removeFav }) => {
   return (
     <>
       <Row className="mt-3 movieView">
-        <Col>
+        <div className="movieTitle mt-3">
+          <span className="h1">{selectedMovie.title} ({selectedMovie.year})</span>
+        </div>
+
+        <Col md={5} className="col-12">
           {isFavorite.includes(selectedMovie)
            ? (<Button onClick={remove} style={{backgroundColor: "transparent", border:"none"}}>
               <div className="favorited mt-4"><FaHeart /></div>
@@ -30,38 +34,44 @@ export const MovieView = ({ movies, isFavorite, addFav, removeFav }) => {
           : (<Button type="submit" onClick={add} style={{backgroundColor: "transparent", border:"none"}}>
               <div className="notFavorited mt-4"><FaRegHeart /></div>
             </Button>)}
-          <img src={selectedMovie.image} className="w-100"/>
+          <img src={selectedMovie.image} className="w-100" style={{borderRadius: "10px"}}/>
         </Col>
-        <Col md={7} className="mt-3">
-          <div className="movieTitle mb-3 mt-3">
-            <span className="h2">{selectedMovie.title} ({selectedMovie.year})</span>
-          </div>
-          <div>
-            <span className="h6">Genre: </span>
-            <span>{selectedMovie.genre.Name}</span>
-          </div>
-          <div className="mt-1">
-            <span className="h6">Director: </span>
-            <span>{selectedMovie.director.Name}</span>
-          </div>
-          <div className="mt-1">
-            <span className="h6">Summary: </span>
-            <span>{selectedMovie.summary}</span>
-          </div>
-          <div className="mt-1">
-            <span className="h6">Featured: </span>
-            <span>{selectedMovie.featured}</span>
+        <Col md={7} className="mt-5">
+          <div className="viewText">
+            <Row className="justify-content-md-center">
+              <Col lg={4} md={6} className="col-4">
+              <p className="viewLabel">Genre</p>
+              <p className="viewInfo">
+                  {` ` + selectedMovie.genre.Name}
+                  </p>
+              </Col>
+              <Col lg={4} md={6} className="col-4">
+              <p className="viewLabel">Director</p>
+                <p className="viewInfo">
+                  {` ` + selectedMovie.director.Name}
+                </p>
+              </Col>
+              <Col lg={4} md={12} className="col-4">
+                <p className="viewLabel">Featured</p>
+                <p className="viewInfo">
+                  {selectedMovie.featured 
+                  ? ` Yes` 
+                  : ` No`}</p>
+              </Col>
+            </Row><p className="mt-2">{selectedMovie.summary}</p>
           </div>
         </Col>
       </Row>
-      <Row className="mb-5">
-        <Button className="mt-3 w-100 primaryButton" variant="primary" onClick={() => navigate(-1)}>Back</Button>
-      </Row>
-      <Row className="mt-3 mb-3 justify-content-md-center">
+
+      <Row>
+        <Button className="w-100 primaryButton mt-4" variant="primary" onClick={() => navigate(-1)}>Back</Button></Row>
+
+      <Row className="mt-4 mb-3 justify-content-md-center">
+        <Col>
         {similarMovies.length !== 0
-          ? (<Row><span className="h3 viewLabel mb-4">more {selectedMovie.genre.Name} movies</span>
+          ? (<Row><span className="h5 similarLabel mb-4">more {selectedMovie.genre.Name} movies</span>
             {similarMovies.map((movie) => (
-              <Col lg={3} md={6} className="mb-2">
+              <Col lg={3} md={4} className="mb-2 col-6">
                 <MovieCard 
                   movie={movie}
                   isFavorite={isFavorite}
@@ -70,8 +80,9 @@ export const MovieView = ({ movies, isFavorite, addFav, removeFav }) => {
                 />
               </Col>
             ))}</Row>)
-          : <Row><span className="mb-4 h3 viewLabel">No similar movies found</span></Row>
-          }
+          : <Row><span className="mb-4 h4 similarLabel">No similar movies found</span></Row>
+        }
+        </Col>
       </Row>
     </>
   );
