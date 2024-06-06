@@ -26,8 +26,8 @@ export const DirectorView = ({ about, movies, isFavorite, resetSearch, addFav, r
         <br/>
         <br/>
           {bio
-           ? bio.replace(/["]+/g,'')
-             : bio}</p>
+          ? bio.replace(/["]+/g,'')
+          : bio}</p>
         <br/>
         <br/>
         {movies.filter((movie) => {
